@@ -1,0 +1,431 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>Computer Security Incident Handling Guide</title>
+
+	<link rel="stylesheet" href="dist/reset.css">
+	<link rel="stylesheet" href="dist/reveal.css">
+	<link rel="stylesheet" href="dist/theme/black.css">
+
+	<!-- Theme used for syntax highlighted code -->
+	<link rel="stylesheet" href="plugin/highlight/monokai.css">
+
+	<!-- Icons -->
+	<link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section>
+				<section data-auto-animate>
+					<h2>Computer Security <br> Incident Handling Guide</h2>
+				</section>
+				<section data-auto-animate>
+					<h2>Computer Security <br> Incident Handling Guide</h2>
+					<p>Presented at</p>
+					<img class="r-stretch" style="border-radius: 25px;" src="img/ITCamp.png" alt="ITCamp Virtual 2021">
+					<p>by Ahmada Yusril, ITSec Engineer@PANDI</p>
+				</section>
+				<section data-auto-animate>
+					<h2>Computer Security <br> Incident Handling Guide</h2>
+					<img src="img/IR_All.png" width="700" alt="Incident Handling Guide">
+				</section>
+				<section data-background-iframe="assets/[NIST.SP.800-61r2].pdf" data-background-interactive></section>
+			</section>
+			<!-- 1. Preparation -->
+			<section>
+				<section>
+					<h2>Preparation</h2>
+					<img src="img/IR_1.png" width="700" alt="Step 1: Preparation">
+					<aside class="notes">
+						Incident response methodologies typically emphasize preparation—not only establishing an incident response
+						capability so that the organization is ready to respond to incidents, but also preventing incidents by
+						ensuring that systems, networks, and applications are sufficiently secure. Although the incident
+						response team is not typically responsible for incident prevention, it is fundamental to the success of
+						incident response programs.
+					</aside>
+				</section>
+				<section>
+					<blockquote>&ldquo;Better safe than sorry.&rdquo;</blockquote>
+				</section>
+				<section>
+					<h3>Preparing to Handle Incidents</h3>
+					<ul>
+						<li>Incident Handler Communications and Facilities</li>
+						<li>Incident Analysis Hardware and Software</li>
+						<li>Incident Analysis Resources</li>
+						<li>Incident Mitigation Software</li>
+					</ul>
+					<aside class="notes">
+						Examples sets of tools and resources available that may be of value during incident handling.
+						<ul>
+							<li>Incident Handler Communications and Facilities:
+								<ul>
+									<li>Contact information for team members</li>
+									<li>Incident reporting mechanisms</li>
+									<li>War room for central communication</li>
+								</ul>
+							</li>
+							<li>Incident Analysis Hardware and Software:
+								<ul>
+									<li>backup devices to create disk images, preserve log files, and save other relevant incident data
+									</li>
+									<li>Packet sniffers to capture and analyze network traffic</li>
+								</ul>
+							</li>
+							<li>Incident Analysis Resources:
+								<ul>
+									<li>Network diagrams and lists of critical assets, such as database servers</li>
+									<li>Port lists, including commonly used ports and Trojan horse ports</li>
+								</ul>
+							</li>
+							<li>Incident Mitigation Software: Access to images of clean OS and application installations for
+								restoration and recovery purposes</li>
+						</ul>
+					</aside>
+				</section>
+				<section>
+					<h3>Preventing Incidents</h3>
+					<ul>
+						<li>Risk Assessments</li>
+						<li>Host Security</li>
+						<li>Network Security</li>
+						<li>Malware Prevention</li>
+						<li>User Awareness and Training</li>
+					</ul>
+				</section>
+			</section>
+			<!-- 2. Detection & Analysis -->
+			<section>
+				<section>
+					<h2>Detection & Analysis</h2>
+					<img src="img/IR_2.png" width="700" alt="Step 2: Detection & Analysis">
+				</section>
+				<section>
+					<blockquote>&ldquo;Knowing is half the battle.&rdquo;</blockquote>
+				</section>
+				<section>
+					<h3>Attack Vectors</h3>
+					<ul>
+						<li>External/Removable Media</li>
+						<li>Attrition/Degradation</li>
+						<li>Web</li>
+						<li>Email</li>
+						<li>Impersonation</li>
+						<li>Improper Usage</li>
+						<li>Loss or Theft of Equipment</li>
+						<li>and Others 👻</li>
+					</ul>
+				</section>
+				<section>
+					<h3>Signs of an Incident: Precursors</h3>
+					<p>A sign that an incident may occur in the future</p>
+					<ul>
+						<li>Web server log entries that show the usage of a vulnerability scanner</li>
+						<li>An announcement of a new exploit that targets a vulnerability of the organization’s mail server</li>
+						<li>A threat from a group stating that the group will attack the organization</li>
+					</ul>
+				</section>
+				<section>
+					<h3>Signs of an Incident: Indicators</h3>
+					<p>A sign that an incident may have occurred or <br> may be occurring now</p>
+					<ul>
+						<li>Antivirus software alerts when it detects that a host is infected with malware</li>
+						<li>A system administrator sees a filename with unusual characters</li>
+						<li>An application logs multiple failed login attempts from an unfamiliar remote system</li>
+						<li>A network administrator notices an unusual deviation from typical network traffic flows</li>
+					</ul>
+				</section>
+				<section>
+					<h3 class="r-fit-text">Sources of Precursors and Indicators</h3>
+					<ul>
+						<li><strong><u>Alerts:</u></strong> IDPS, SIEM, Antivirus/Antispam, File integrity checking software,
+							Third-party monitoring services</li>
+						<li><strong><u>Logs:</u></strong> OS logs, Service logs, Application logs, Network device logs, Network
+							flows</li>
+						<li><strong><u>Publicly Available Information:</u></strong> New vulnerabilities and exploits information
+						</li>
+						<li><strong><u>People:</u></strong> Information from people within the organization and other organizations
+						</li>
+					</ul>
+				</section>
+				<section>
+					<h3>Incident Analysis</h3>
+					<ul>
+						<li>Maintain and Use a Knowledge Base of Information</li>
+						<li>Use Internet Search Engines for Research</li>
+						<li>Understand Normal Behaviors</li> <!-- Profile Networks and Systems -->
+						<li>Create a Log Retention Policy</li>
+						<li>Perform Event Correlation</li> <!-- Keep All Host Clocks Synchronized -->
+						<li>Filter the Data</li> <!-- Run Packet Sniffers to Collect Additional Data -->
+						<li>Seek Assistance from Others</li>
+					</ul>
+				</section>
+				<section>
+					<h3>Incident Documentation</h3>
+					<ul class="r-fit-text">
+						<li>The current status of the incident</li>
+						<li>A summary of the incident</li>
+						<li>Indicators and other incidents related to the incident</li>
+						<li>Actions taken by all incident handlers on this incident</li>
+						<li>Impact assessments related to the inciden</li>
+						<li>Contact information for other involved parties</li>
+						<li>A list of evidence gathered during the incident investigation</li>
+						<li>Comments from incident handlers</li>
+						<li>Next steps to be taken</li>
+					</ul>
+				</section>
+				<section>
+					<h3>Incident Prioritization</h3>
+					<ul>
+						<li>Functional Impact of the Incident</li>
+						<li>Information Impact of the Incident</li>
+						<li>Recoverability from the Incident</li>
+					</ul>
+				</section>
+				<section>
+					<h3>Incident Notification</h3>
+					<ul>
+						<li>CIO</li>
+						<li>Head of information security</li>
+						<li>Local information security officer</li>
+						<li>Other incident response teams within the organization</li>
+						<li>External incident response teams (if appropriate)</li>
+						<li>System owner</li>
+						<li>Human resources/Public affairs/Legal department</li>
+						<li>Law enforcement (if appropriate)</li>
+					</ul>
+				</section>
+			</section>
+			<!-- 3. Containment, Eradication, Recovery -->
+			<section>
+				<section>
+					<h2 class="r-fit-text">Containment, Eradication, Recovery</h2>
+					<img src="img/IR_3.png" width="700" alt="Step 3: Containment, Eradication, Recovery">
+				</section>
+				<section><img src="img/good-luck.gif" alt="Good Luck"></section>
+				<section>
+					<h3>Choosing a Containment Strategy</h3>
+					<ul>
+						<li>Potential damage to and theft of resources</li>
+						<li>Need for evidence preservation</li>
+						<li>Service availability</li>
+						<!--(e.g., network connectivity, services provided to external parties)-->
+						<li>Resources needed to implement the strategy</li>
+						<li>Effectiveness of the strategy</li>
+						<!--(e.g., partial containment, full containment)-->
+						<li>Duration of the solution</li>
+						<!--(e.g., temporary solution, permanent solution)-->
+					</ul>
+					<aside class="notes">
+						<ul>
+							<li>Potential damage to and theft of resources</li>
+							<li>Need for evidence preservation</li>
+							<li>Service availability (e.g., network connectivity, services provided to external parties)</li>
+							<li>Resources needed to implement the strategy</li>
+							<li>Effectiveness of the strategy (e.g., partial containment, full containment)</li>
+							<li>Duration of the solution (e.g., temporary solution, permanent solution)</li>
+						</ul>
+					</aside>
+				</section>
+				<section data-auto-animate>
+					<h3>Evidence Gathering and Handling</h3>
+					<p>It is generally desirable to acquire evidence from a system of interest as soon as one suspects that an
+						incident may have occurred.</p>
+				</section>
+				<section data-auto-animate>
+					<h3>Evidence Gathering and Handling</h3>
+					<p>From an evidentiary standpoint, it is much better to get a snapshot of the system as-is rather than doing
+						so after incident handlers, system administrators, and others have inadvertently altered the state of the
+						machine during the investigation.</p>
+				</section>
+				<section>
+					<h3>Identifying the Attacking Hosts</h3>
+					<ul>
+						<li>Validating the Attacking Host’s IP Address</li>
+						<li>Researching the Attacking Host through Search Engines</li>
+						<li>Using Incident Databases</li>
+						<li>Monitoring Possible Attacker Communication Channels</li>
+					</ul>
+				</section>
+				<section data-auto-animate>
+					<h3>Eradication and Recovery</h3>
+					<p>After an incident has been contained, eradication may be necessary to eliminate components of the incident.
+					</p>
+				</section>
+				<section data-auto-animate>
+					<h3>Eradication and Recovery</h3>
+					<p>During eradication, it is important to identify all affected hosts within the organization so that they can
+						be remediated.</p>
+				</section>
+				<section data-auto-animate>
+					<h3>Eradication and Recovery</h3>
+					<p>In recovery, administrators restore systems to normal operation, confirm that the systems are functioning
+						normally, and (if applicable) remediate vulnerabilities to prevent similar incidents.</p>
+				</section>
+			</section>
+			<!-- 4. Post-Incident Activity -->
+			<section>
+				<section>
+					<h2>Post-Incident Activity</h2>
+					<img src="img/IR_4.png" width="700" alt="Step 4: Post-Incident Activity">
+				</section>
+				<section>
+					<blockquote>&ldquo;Mistakes are not a problem. <br> Not learning from them is.&rdquo;</blockquote>
+				</section>
+				<section>
+					<h3>Lessons Learned</h3>
+					<ul style="font-size: 36px;">
+						<li>Exactly what happened, and at what times?</li>
+						<li>How well did staff and management perform?</li>
+						<!--How well did staff and management perform in dealing with the incident? Were the documented procedures followed? Were they adequate?-->
+						<li>What information was needed sooner?</li>
+						<li>Were any steps or actions taken that might have inhibited the recovery?</li>
+						<li>What would be done differently the next incident?</li>
+						<!--What would be done differently the next time a similar incident occurs?-->
+						<li>How could information sharing with other organizations have been improved?</li>
+						<li>How to prevent similar incidents in the future?</li>
+						<!--corrective actions-->
+						<li>What precursors/indicators should be watched in the future?</li>
+						<!--What precursors/indicators should be watched for in the future to detect similar incidents?-->
+						<li>What additional tools or resources are needed for future incidents?</li>
+						<!--to detect, analyze, and mitigate-->
+					</ul>
+				</section>
+				<section>
+					<h3>Using Collected Incident Data</h3>
+					<ul>
+						<li>Number of Incidents Handled</li>
+						<li>Time Per Incident</li>
+						<li>Objective Assessment of Each Incident</li>
+						<li>Subjective Assessment of Each Incident</li>
+					</ul>
+				</section>
+				<section>
+					<h3>Evidence Retention</h3>
+					<ul>
+						<li>Prosecution</li>
+						<li>Data Retention</li>
+						<li>Cost</li>
+					</ul>
+					<aside class="notes">
+						<ul>
+							<li>Prosecution. If it is possible that the attacker will be prosecuted, evidence may need to be retained
+								until all legal actions have been completed.</li>
+							<li>Data Retention. Most organizations have data retention policies that state how long certain types of
+								data may be kept.</li>
+							<li>Cost. If an organization stores many such components for years, the cost can be substantial</li>
+						</ul>
+					</aside>
+				</section>
+			</section>
+			<!-- 5. Incident Handling Checklist -->
+			<section>
+				<section data-auto-animate data-auto-animate-id="1">
+					<h2 class="r-fit-text">Incident Handling Checklist ✅</h2>
+				</section>
+				<section data-auto-animate data-auto-animate-id="1">
+					<h2 class="r-fit-text">Incident Handling Checklist ✅</h2>
+					<img src="img/Checklist_1.jpg" alt="Checklist 1">
+				</section>
+				<section data-auto-animate data-auto-animate-id="1">
+					<h2 class="r-fit-text">Incident Handling Checklist ✅</h2>
+					<img src="img/Checklist_2.jpg" alt="Checklist 2">
+				</section>
+				<section data-auto-animate data-auto-animate-id="1">
+					<h2 class="r-fit-text">Incident Handling Checklist ✅</h2>
+					<img src="img/Checklist_3.jpg" alt="Checklist 3">
+				</section>
+			</section>
+			<!-- 6. Recommendations -->
+			<section>
+				<section data-auto-animate data-auto-animate-id="2">
+					<h2>Recommendations</h2>
+				</section>
+				<section data-auto-animate data-auto-animate-id="2">
+					<h2>Recommendations</h2>
+					<ul>
+						<li>Acquire tools and resources that may be of value during incident handling</li>
+						<li>Prevent incidents from occurring by ensuring that networks, systems, and applications are sufficiently
+							secure</li>
+						<li>Identify precursors and indicators through alerts generated by several types of security software</li>
+						<li>Establish mechanisms for outside parties to report incidents</li>
+					</ul>
+				</section>
+				<section data-auto-animate data-auto-animate-id="2">
+					<h2>Recommendations</h2>
+					<ul>
+						<li>Require a baseline level of logging and auditing on all systems, and a higher baseline level on all
+							critical systems</li>
+						<li>Do profiling for networks and systems</li>
+						<li>Understand the normal behaviors of networks, systems, and applications</li>
+						<li>Create a log retention policy</li>
+					</ul>
+				</section>
+				<section data-auto-animate data-auto-animate-id="2">
+					<h2>Recommendations</h2>
+					<ul>
+						<li>Perform event correlation & keep all host clocks synchronized</li>
+						<li>Maintain and use a knowledge base of information</li>
+						<li>Start recording all information as soon as the team suspects that an incident has occurred</li>
+					</ul>
+				</section>
+				<section data-auto-animate data-auto-animate-id="2">
+					<h2>Recommendations</h2>
+					<ul>
+						<li>Safeguard incident data</li>
+						<li>Prioritize handling of the incidents based on the relevant factors</li>
+						<li>Establish strategies and procedures for containing incidents</li>
+					</ul>
+				</section>
+				<section data-auto-animate data-auto-animate-id="2">
+					<h2>Recommendations</h2>
+					<ul>
+						<li>Follow established procedures for evidence gathering and handling</li>
+						<li>Hold lessons learned meetings after major incidents</li>
+					</ul>
+				</section>
+			</section>
+			<section>
+				<section>
+					The End <span class="fragment">(?)</span>
+				</section>
+				<section data-background-color="white" data-background-iframe="https://safe.page/quiz"
+					data-background-interactive></section>
+				<section>
+					Go to <a href="https://safe.page/quiz">safe.page/quiz</a>
+				</section>
+				<section>
+					<h2>Thank you!</h2>
+					<p>This presentation will be uploaded to <br> <u>s.id/materi-itcamp-yusril</u></p>
+				</section>
+			</section>
+		</div>
+	</div>
+
+	<script src="dist/reveal.js"></script>
+	<script src="plugin/notes/notes.js"></script>
+	<script src="plugin/markdown/markdown.js"></script>
+	<script src="plugin/highlight/highlight.js"></script>
+	<script>
+		// More info about initialization & config:
+		// - https://revealjs.com/initialization/
+		// - https://revealjs.com/config/
+		Reveal.initialize({
+			hash: true,
+
+			// Learn about plugins: https://revealjs.com/plugins/
+			plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+		});
+	</script>
+</body>
+
+</html>
