@@ -1,0 +1,50 @@
+/*
+ * Tailwind supplies the theme tokens and utilities. Its Preflight reset is left
+ * out on purpose: The Monospace Web brings its own reset and element styles,
+ * which make up the base layer so utilities can still override them.
+ */
+@layer theme, base, components, utilities;
+
+@import 'tailwindcss/theme.css' layer(theme);
+@import '../lib/styles/reset.css' layer(base);
+@import '../lib/styles/monospace.css' layer(base);
+@import 'tailwindcss/utilities.css' layer(utilities);
+
+/* The vendored reveal.js slides are copied verbatim; don't scan them for classes. */
+@source not '../../static';
+
+/* Keep the vocabulary to the monospace palette and grid units. */
+@theme {
+	--color-*: initial;
+}
+
+@theme inline {
+	--color-fg: var(--text-color);
+	--color-fg-alt: var(--text-color-alt);
+	--color-bg: var(--background-color);
+	--color-bg-alt: var(--background-color-alt);
+	--font-mono: var(--font-family);
+	--spacing-line: var(--line-height);
+	--spacing-ch: 1ch;
+}
+
+/* A bordered box whose contents stay on the character grid, like <details>. */
+@utility box {
+	border: var(--border-thickness) solid var(--text-color);
+	padding: calc(var(--line-height) - var(--border-thickness)) calc(1ch - var(--border-thickness));
+}
+
+/* Two columns, each a whole number of characters wide, separated by 2ch. */
+@utility grid-cols-2-ch {
+	grid-template-columns: repeat(2, round(down, calc((100% - 2ch) / 2), 1ch));
+}
+
+/* Emoji come from a fallback font with different metrics; pin them to a 2ch × 1 line cell. */
+@utility emoji-cell {
+	display: inline-block;
+	width: 2ch;
+	height: var(--line-height);
+	margin: 0;
+	vertical-align: top;
+	text-align: center;
+}

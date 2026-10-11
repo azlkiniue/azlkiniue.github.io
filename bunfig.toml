@@ -1,0 +1,4 @@
+# Run package scripts (vite, svelte-kit, ...) on the Bun runtime instead of Node,
+# even though their bin files have a `#!/usr/bin/env node` shebang.
+[run]
+bun = true

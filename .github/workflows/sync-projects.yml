@@ -1,0 +1,43 @@
+name: Sync projects
+
+on:
+  schedule:
+    # 03:00 UTC every 3rd day of the month (1st, 4th, 7th, …). Cron restarts the
+    # count each month, so e.g. the 31st and the 1st run back to back.
+    - cron: '0 3 */3 * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write # commit the refreshed project data
+  actions: write # start the deploy workflow
+
+concurrency:
+  group: sync-projects
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version-file: package.json
+      - run: bun install --frozen-lockfile
+      - run: bun run sync:projects
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+      - name: Commit and deploy if changed
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if git diff --quiet -- src/lib/data/projects.json; then
+            echo "Project data is up to date; nothing to deploy."
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'Sync featured projects from profile README' -- src/lib/data/projects.json
+          git push
+          # Pushes made with GITHUB_TOKEN don't trigger other workflows, so start the
+          # GitHub Pages deploy explicitly. (Cloudflare Pages builds on the push itself.)
+          gh workflow run deploy.yml --ref "$GITHUB_REF_NAME"

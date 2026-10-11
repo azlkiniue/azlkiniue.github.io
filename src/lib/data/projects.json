@@ -1,0 +1,127 @@
+{
+	"source": "https://github.com/azlkiniue/azlkiniue",
+	"syncedAt": "2026-10-11T16:23:14.507Z",
+	"projects": [
+		{
+			"emoji": "🌌",
+			"name": "astronomy-education",
+			"description": "Bilingual interactive astronomy simulations.",
+			"url": "https://azlkiniue.github.io/astronomy-education/",
+			"repo": "https://github.com/azlkiniue/astronomy-education",
+			"language": "JavaScript",
+			"license": "MIT",
+			"createdAt": "2026-09-30T10:45:55Z",
+			"pushedAt": "2026-10-06T04:49:55Z"
+		},
+		{
+			"emoji": "👨‍🚀",
+			"name": "piste",
+			"description": "People in Space Timeline.",
+			"url": "https://azlkiniue.github.io/piste/",
+			"repo": "https://github.com/azlkiniue/piste",
+			"language": "TypeScript",
+			"license": "MIT",
+			"createdAt": "2026-06-16T11:38:04Z",
+			"pushedAt": "2026-10-11T07:33:07Z"
+		},
+		{
+			"emoji": "🌗",
+			"name": "diurnoct",
+			"description": "Diurnal + nocturnal, a geochron-like app.",
+			"url": "https://azlkiniue.github.io/diurnoct/",
+			"repo": "https://github.com/azlkiniue/diurnoct",
+			"language": "TypeScript",
+			"license": "MIT",
+			"createdAt": "2026-06-15T09:44:23Z",
+			"pushedAt": "2026-07-22T04:04:14Z"
+		},
+		{
+			"emoji": "🦕",
+			"name": "zaman-zamin",
+			"description": "Interactive geological time scale.",
+			"url": "https://azlkiniue.github.io/zaman-zamin/",
+			"repo": "https://github.com/azlkiniue/zaman-zamin",
+			"language": "TypeScript",
+			"license": "GPL-3.0",
+			"createdAt": "2026-06-12T05:09:00Z",
+			"pushedAt": "2026-07-21T04:43:03Z"
+		},
+		{
+			"emoji": "☸️",
+			"name": "kurete",
+			"description": "Kubernetes release timeline.",
+			"url": "https://azlkiniue.github.io/kurete/",
+			"repo": "https://github.com/azlkiniue/kurete",
+			"language": "TypeScript",
+			"license": "Apache-2.0",
+			"createdAt": "2026-06-11T02:28:34Z",
+			"pushedAt": "2026-09-03T03:04:34Z"
+		},
+		{
+			"emoji": "⭐",
+			"name": "sidereum",
+			"description": "Organize your GitHub stars.",
+			"url": "https://azlkiniue.github.io/sidereum/",
+			"repo": "https://github.com/azlkiniue/sidereum",
+			"language": "Svelte",
+			"license": "MIT",
+			"createdAt": "2026-06-06T00:53:27Z",
+			"pushedAt": "2026-08-27T04:26:00Z"
+		},
+		{
+			"emoji": "⏳",
+			"name": "kala",
+			"description": "Track your life in moments.",
+			"url": "https://azlkiniue.github.io/kala/",
+			"repo": "https://github.com/azlkiniue/kala",
+			"language": "Svelte",
+			"license": "MIT",
+			"createdAt": "2026-06-01T10:18:53Z",
+			"pushedAt": "2026-07-02T04:01:01Z"
+		},
+		{
+			"emoji": "🚇",
+			"name": "busan-subway",
+			"description": "Interactive Busan subway map that adjusts distance based on travel time.",
+			"url": "https://azlkiniue.github.io/busan-subway/",
+			"repo": "https://github.com/azlkiniue/busan-subway",
+			"language": "JavaScript",
+			"license": null,
+			"createdAt": "2025-06-02T06:52:58Z",
+			"pushedAt": "2025-06-03T04:25:31Z"
+		},
+		{
+			"emoji": "🚉",
+			"name": "busan-metro-gtfs",
+			"description": "Busan metro GTFS data project for transit mapping and schedule analysis.",
+			"url": "https://azlkiniue.github.io/busan-metro-gtfs/",
+			"repo": "https://github.com/azlkiniue/busan-metro-gtfs",
+			"language": "HTML",
+			"license": "MIT",
+			"createdAt": "2025-06-02T02:13:23Z",
+			"pushedAt": "2025-06-15T08:09:23Z"
+		},
+		{
+			"emoji": "📖",
+			"name": "quran-stats",
+			"description": "Explore Al-Qur'an from the perspective of statistics.",
+			"url": "https://azlkiniue.github.io/quran-stats/",
+			"repo": "https://github.com/azlkiniue/quran-stats",
+			"language": "TypeScript",
+			"license": "MIT",
+			"createdAt": "2025-03-29T02:31:01Z",
+			"pushedAt": "2025-03-29T03:26:33Z"
+		},
+		{
+			"emoji": "🔀",
+			"name": "konffusion",
+			"description": "Kubeconfig merging made easy.",
+			"url": "https://azlkiniue.github.io/konffusion/",
+			"repo": "https://github.com/azlkiniue/konffusion",
+			"language": "Svelte",
+			"license": "MIT",
+			"createdAt": "2024-07-17T07:05:51Z",
+			"pushedAt": "2026-10-02T08:45:06Z"
+		}
+	]
+}
