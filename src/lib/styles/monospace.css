@@ -3,8 +3,11 @@
  * Licensed under the MIT License (https://github.com/owickstrom/the-monospace-web/blob/main/LICENSE.md)
  *
  * Vendored from src/index.css of https://github.com/owickstrom/the-monospace-web
- * (v0.1.5). Changes: the font is self-hosted via @fontsource-variable instead of
- * the fonts.cdnfonts.com @import.
+ * (v0.1.5). Changes:
+ * - the font is self-hosted via @fontsource-variable instead of the
+ *   fonts.cdnfonts.com @import;
+ * - the last item of a .tree no longer sits --border-thickness to the left of
+ *   its siblings (see `.tree ul li:last-child`).
  **/
 
 :root {
@@ -409,16 +412,20 @@ label input {
   width: 1ch;
   border-bottom: var(--border-thickness) solid var(--text-color);
 }
+/* The last item keeps its border, just invisible, so it takes up the same width
+   as its siblings; removing it would shift the item and everything nested in it
+   left by --border-thickness. The └ stub is drawn over that border instead, long
+   enough to meet the horizontal connector. */
 .tree ul li:last-child {
-  border-left: none;
+  border-left-color: transparent;
 }
 .tree ul li:last-child:after {
   position: absolute;
   display: block;
   top: 0;
-  left: 0;
+  left: calc(-1 * var(--border-thickness));
   content: "";
-  height: calc(var(--line-height) / 2);
+  height: calc(var(--line-height) / 2 + var(--border-thickness));
   border-left: var(--border-thickness) solid var(--text-color);
 }
 
