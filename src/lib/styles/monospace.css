@@ -7,12 +7,22 @@
  * - the font is self-hosted via @fontsource-variable instead of the
  *   fonts.cdnfonts.com @import;
  * - the last item of a .tree no longer sits --border-thickness to the left of
- *   its siblings (see `.tree ul li:last-child`).
+ *   its siblings (see `.tree ul li:last-child`);
+ * - --line-height is rounded to a multiple of 5/8px so lines of text don't
+ *   drift off the grid in Chrome (see `:root`);
+ * - table and details borders are drawn on pseudo-elements that take no space,
+ *   so a browser rounding them to whole device pixels can't push the content
+ *   off the grid (see `th, td`). Table rules are now centred on the cell edges.
  **/
 
 :root {
   --font-family: "JetBrains Mono Variable", "JetBrains Mono", monospace;
-  --line-height: 1.20rem;
+  /* 1.2rem rounded to a multiple of 5/8px. Chrome lays out in 1/64 of a device
+     pixel and rounds line boxes to the nearest step but margins and paddings
+     down, so at 19.2px each line of text ran 1/64px taller than the grid. A
+     multiple of 5/8px is a whole number of steps at every scaling and zoom that
+     is a multiple of 2.5% (80%, 90%, 100%, 110%, 125%, 150%, 175%, 200%, ...). */
+  --line-height: round(1.2rem, 0.625px);
   --border-thickness: 2px;
   --text-color: #000;
   --text-color-alt: #666;
@@ -147,24 +157,38 @@ sub {
 table {
   position: relative;
   top: calc(var(--line-height) / 2);
-  width: calc(round(down, 100%, 1ch));
+  /* Half a border in from each side, so the frame (centred on the table's
+     edges) lines up with the content edges. */
+  width: calc(round(down, 100%, 1ch) - var(--border-thickness));
   border-collapse: collapse;
-  margin: 0 0 calc(var(--line-height) * 2);
+  margin: 0 0 calc(var(--line-height) * 2) calc(var(--border-thickness) / 2);
 }
 
+/* The rules are drawn on pseudo-elements, which take no space, so the padding
+   alone keeps rows on the grid. Browsers round border widths down to whole
+   device pixels (2px is 1.6px at 125%), so real borders came out thinner than
+   the padding allowed for and pulled everything below off the grid. Each rule
+   is centred on a cell edge: cells draw their top and left, the table the frame. */
 th, td {
-  border: var(--border-thickness) solid var(--text-color);
-  padding: 
-    calc((var(--line-height) / 2))
-    calc(1ch - var(--border-thickness) / 2)
-    calc((var(--line-height) / 2) - (var(--border-thickness)))
-  ;
+  position: relative;
+  padding: calc(var(--line-height) / 2) 1ch;
   line-height: var(--line-height);
   vertical-align: top;
   text-align: left;
 }
-table tbody tr:first-child > * {
-  padding-top: calc((var(--line-height) / 2) - var(--border-thickness));
+table::after,
+th::before,
+td::before {
+  content: "";
+  position: absolute;
+  inset: calc(var(--border-thickness) / -2);
+  border: var(--border-thickness) solid var(--text-color);
+  pointer-events: none;
+}
+th::before,
+td::before {
+  border-right: none;
+  border-bottom: none;
 }
 
 
@@ -205,10 +229,18 @@ img {
   color: var(--text-color-alt);
 }
 
+/* Its border takes no space either; see `th, td`. */
 details {
-  border: var(--border-thickness) solid var(--text-color);
-  padding: calc(var(--line-height) - var(--border-thickness)) 1ch;
+  position: relative;
+  padding: var(--line-height) calc(1ch + var(--border-thickness));
   margin-bottom: var(--line-height);
+}
+details::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: var(--border-thickness) solid var(--text-color);
+  pointer-events: none;
 }
 
 summary {

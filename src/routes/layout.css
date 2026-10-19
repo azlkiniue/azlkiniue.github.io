@@ -28,10 +28,22 @@
 	--spacing-ch: 1ch;
 }
 
-/* A bordered box whose contents stay on the character grid, like <details>. */
+/*
+ * A bordered box whose contents stay on the character grid, like <details>. The
+ * border is drawn on a pseudo-element that takes no space, since browsers round
+ * it to whole device pixels (see `th, td` in monospace.css).
+ */
 @utility box {
-	border: var(--border-thickness) solid var(--text-color);
-	padding: calc(var(--line-height) - var(--border-thickness)) calc(1ch - var(--border-thickness));
+	position: relative;
+	padding: var(--line-height) 1ch;
+
+	&::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		border: var(--border-thickness) solid var(--text-color);
+		pointer-events: none;
+	}
 }
 
 /* Two columns, each a whole number of characters wide, separated by 2ch. */
